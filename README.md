@@ -7,8 +7,7 @@
 
 ## 👩‍💻 About
 
-I'm a Computer Science graduate specialising in **Big Data Analytics**, data engineering, and AI-assisted data solutions. Currently open for work in Data Engineering and BI developpement fields.
-
+I'm a Computer Science graduate with a specialization in Big Data Analytics, Data Engineering, and AI-assisted data solutions. I'm currently seeking opportunities in Data Engineering and Business Intelligence (BI), where I can apply and further develop my technical skills.
 ---
 
 ## 🗂️ What's inside
