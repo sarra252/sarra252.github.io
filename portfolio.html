@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarra Mokrani — Big Data & Data Engineering</title>
+  <meta name="description" content="Portfolio of Sarra Mokrani, Computer Science graduate specialising in Big Data Analytics, data engineering, SQL optimisation, and AI-assisted data solutions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b2a;
+      --navy2: #11233a;
+      --teal: #00c9a7;
+      --teal2: #00a88a;
+      --teal-dim: rgba(0,201,167,0.12);
+      --sg: 'Space Grotesk', sans-serif;
+      --inter: 'Inter', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --text: #1a1a2e;
+      --muted: #5f6b7a;
+      --border: rgba(0,0,0,0.09);
+      --bg: #f8f9fb;
+      --card: #ffffff;
+      --tag-bg: #e0faf4;
+      --tag-text: #065f46;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #e8edf2;
+        --muted: #8a97a6;
+        --border: rgba(255,255,255,0.09);
+        --bg: #0a1220;
+        --card: #121e2d;
+        --tag-bg: rgba(0,201,167,0.12);
+        --tag-text: #5ee8cc;
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--inter);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,27,42,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,201,167,0.15);
+      padding: 0 max(1.5rem, calc(50vw - 580px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--teal);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* ─── LAYOUT ─── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section { padding: 4rem 0; }
+    section + section { padding-top: 0; }
+
+    /* ─── HERO ─── */
+    #hero {
+      background: var(--navy);
+      padding: 5rem max(1.5rem, calc(50vw - 430px)) 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -80px;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,201,167,0.1);
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -20px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,201,167,0.07);
+    }
+    .hero-inner { max-width: 860px; margin: 0 auto; position: relative; }
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.25rem;
+    }
+    .hero-name {
+      font-family: var(--sg);
+      font-size: clamp(34px, 6vw, 56px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    .hero-name span { color: var(--teal); }
+    .terminal-line {
+      font-family: var(--mono);
+      font-size: 16px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 2rem;
+      min-height: 26px;
+    }
+    .cursor {
+      display: inline-block;
+      width: 9px; height: 16px;
+      background: var(--teal);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .hero-bio {
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+      max-width: 580px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn-primary {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      background: var(--teal);
+      color: var(--navy);
+      border: none;
+      border-radius: 4px;
+      padding: 9px 20px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--teal2); }
+    .btn-ghost {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: var(--teal);
+      border: 1px solid rgba(0,201,167,0.4);
+      border-radius: 4px;
+      padding: 9px 20px;
+      text-decoration: none;
+      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-ghost:hover { background: rgba(0,201,167,0.08); }
+
+    /* ─── SECTION HEADER ─── */
+    .sec-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--teal);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .sec-title {
+      font-family: var(--sg);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+
+    /* ─── SKILLS ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .skill-card {
+      background: var(--card);
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .skill-card-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border-radius: 3px;
+      padding: 3px 8px;
+    }
+
+    /* ─── PROJECTS ─── */
+    .proj-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .proj-card {
+      background: var(--card);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .proj-card:hover {
+      border-color: var(--teal2);
+      transform: translateY(-1px);
+    }
+    .proj-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .proj-title {
+      font-family: var(--sg);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .proj-icon { color: var(--teal); font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .proj-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .proj-year {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .badge {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 2px 9px;
+      border-radius: 3px;
+      font-weight: 500;
+    }
+    .b-internship { background: #fef3c7; color: #92400e; }
+    .b-academic { background: #dbeafe; color: #1e40af; }
+    .b-bachelor { background: #f3e8ff; color: #6b21a8; }
+    @media (prefers-color-scheme: dark) {
+      .b-internship { background: rgba(250,196,62,0.15); color: #fcd34d; }
+      .b-academic { background: rgba(59,130,246,0.15); color: #93c5fd; }
+      .b-bachelor { background: rgba(168,85,247,0.15); color: #d8b4fe; }
+    }
+    .proj-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .proj-highlights {
+      margin: 0 0 12px 1rem;
+      padding: 0;
+    }
+    .proj-highlights li {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tech-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      border: 0.5px solid var(--border);
+      border-radius: 3px;
+      padding: 2px 8px;
+      color: var(--muted);
+    }
+
+    /* ─── EDUCATION ─── */
+    .edu-list { display: flex; flex-direction: column; gap: 12px; }
+    .edu-card {
+      background: var(--card);
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      gap: 16px;
+    }
+    .edu-accent {
+      width: 3px;
+      border-radius: 2px;
+      background: var(--teal);
+      flex-shrink: 0;
+      align-self: stretch;
+    }
+    .edu-degree {
+      font-family: var(--sg);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .edu-school { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .edu-year {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--teal);
+    }
+    .edu-note {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border-radius: 3px;
+      padding: 1px 7px;
+      margin-top: 5px;
+    }
+
+    /* ─── LANGUAGES ─── */
+    .lang-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    .lang-card {
+      background: var(--card);
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .lang-icon {
+      font-size: 22px;
+      color: var(--teal);
+    }
+    .lang-name {
+      font-family: var(--sg);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .lang-level {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      background: var(--navy);
+      padding: 4rem max(1.5rem, calc(50vw - 430px));
+    }
+    .contact-inner { max-width: 860px; margin: 0 auto; }
+    .contact-inner .sec-eyebrow { color: rgba(0,201,167,0.7); }
+    .contact-inner .sec-title { color: #fff; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,201,167,0.12);
+      border-radius: 8px;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: rgba(255,255,255,0.75);
+      font-size: 13px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .contact-item:hover {
+      border-color: rgba(0,201,167,0.4);
+      background: rgba(0,201,167,0.07);
+      color: #fff;
+    }
+    .contact-item i { color: var(--teal); font-size: 18px; flex-shrink: 0; }
+    .contact-label { font-size: 10px; color: rgba(255,255,255,0.35); font-family: var(--mono); margin-bottom: 1px; }
+    .contact-value { font-size: 13px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(0,201,167,0.1);
+      text-align: center;
+      padding: 1.5rem;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero-name { font-size: 32px; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">sarra.mokrani</a>
+    <ul class="nav-links">
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#education">education</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">// portfolio</div>
+      <h1 class="hero-name">Sarra <span>Mokrani</span></h1>
+      <div class="terminal-line" id="terminal"><span class="cursor"></span></div>
+      <p class="hero-bio">
+        Computer Science graduate specialising in Big Data Analytics, data engineering, and AI-assisted data solutions. Currently finishing a Master's at USTHB while building an intelligent SQL chatbot for Djezzy. Looking for opportunities in data engineering, BI, and predictive analytics.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">view projects</a>
+        <a href="#contact" class="btn-ghost"><i class="ti ti-mail" aria-hidden="true"></i> get in touch</a>
+        <a href="Sarra_MOKRANI_CV_EN.pdf" download class="btn-ghost"><i class="ti ti-download" aria-hidden="true"></i> download cv</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="sec-eyebrow">// skills</div>
+      <h2 class="sec-title">Technical stack</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-card-label">Languages</div>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">SQL</span>
+            <span class="tag">C++</span>
+            <span class="tag">Java</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">PHP</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-label">Data & BI</div>
+          <div class="tags">
+            <span class="tag">Teradata SQL</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">Talend</span>
+            <span class="tag">DAX</span>
+            <span class="tag">Tableau</span>
+            <span class="tag">Chart.js</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-label">Big Data & AI</div>
+          <div class="tags">
+            <span class="tag">Apache Kafka</span>
+            <span class="tag">MongoDB</span>
+            <span class="tag">Cassandra</span>
+            <span class="tag">Docker</span>
+            <span class="tag">RAG pipelines</span>
+            <span class="tag">LLM</span>
+            <span class="tag">NLP</span>
+            <span class="tag">ETL</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-label">Frameworks</div>
+          <div class="tags">
+            <span class="tag">Flask</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Streamlit</span>
+            <span class="tag">Django</span>
+            <span class="tag">Laravel</span>
+            <span class="tag">BeautifulSoup</span>
+            <span class="tag">Scrapy</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-label">Engineering</div>
+          <div class="tags">
+            <span class="tag">REST APIs</span>
+            <span class="tag">OAuth / JWT</span>
+            <span class="tag">UML</span>
+            <span class="tag">Agile / Scrum</span>
+            <span class="tag">SOLID</span>
+            <span class="tag">Design Patterns</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-label">Tools</div>
+          <div class="tags">
+            <span class="tag">Git / GitHub</span>
+            <span class="tag">Figma</span>
+            <span class="tag">Postman</span>
+            <span class="tag">Trello</span>
+            <span class="tag">Notion</span>
+            <span class="tag">Graphviz</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="sec-eyebrow">// projects</div>
+      <h2 class="sec-title">Selected work</h2>
+      <div class="proj-grid">
+
+        <div class="proj-card">
+          <div class="proj-head">
+            <div class="proj-title">Intelligent SQL Chatbot — Djezzy</div>
+            <i class="ti ti-robot proj-icon" aria-hidden="true"></i>
+          </div>
+          <div class="proj-meta">
+            <span class="proj-year">Feb 2026 – Jun 2026</span>
+            <span class="badge b-internship">internship</span>
+          </div>
+          <p class="proj-desc">AI-powered chatbot that generates, optimises, and documents Teradata SQL queries from natural language input, built for Djezzy's engineering and business teams.</p>
+          <ul class="proj-highlights">
+            <li>RAG-based knowledge system using database metadata, existing SQL, and schema context</li>
+            <li>Query optimisation for joins, date filters, indexing, and performance improvements</li>
+            <li>Streamlit/FastAPI interface enabling non-SQL users to explore telecom data</li>
+          </ul>
+          <div class="tech-tags">
+            <span class="tech-tag">RAG</span>
+            <span class="tech-tag">Teradata SQL</span>
+            <span class="tech-tag">FastAPI</span>
+            <span class="tech-tag">Streamlit</span>
+            <span class="tech-tag">LLM</span>
+            <span class="tech-tag">Python</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-head">
+            <div class="proj-title">Real-Time Taxi Streaming Pipeline</div>
+            <i class="ti ti-activity proj-icon" aria-hidden="true"></i>
+          </div>
+          <div class="proj-meta">
+            <span class="proj-year">2025 – 2026</span>
+            <span class="badge b-academic">academic</span>
+          </div>
+          <p class="proj-desc">End-to-end Big Data pipeline for NYC Yellow Taxi data using Kafka producers/consumers and comparative NoSQL storage in MongoDB shards and Cassandra clusters.</p>
+          <ul class="proj-highlights">
+            <li>Containerised with Docker Compose including Kafka multi-broker, MongoDB sharding, Cassandra clustering</li>
+            <li>Benchmarked ingestion throughput, query latency, horizontal scalability, and fault tolerance</li>
+          </ul>
+          <div class="tech-tags">
+            <span class="tech-tag">Apache Kafka</span>
+            <span class="tech-tag">MongoDB</span>
+            <span class="tech-tag">Cassandra</span>
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">JSON streaming</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-head">
+            <div class="proj-title">Northwind ETL & BI Dashboard</div>
+            <i class="ti ti-chart-bar proj-icon" aria-hidden="true"></i>
+          </div>
+          <div class="proj-meta">
+            <span class="proj-year">2025 – 2026</span>
+            <span class="badge b-academic">academic</span>
+          </div>
+          <p class="proj-desc">Decision-support data warehouse and interactive Power BI dashboard consolidating Northwind data from SQL Server and Microsoft Access, with full ETL and DAX analytics.</p>
+          <ul class="proj-highlights">
+            <li>ETL pipeline covering extraction, cleaning, deduplication, and dimensional enrichment</li>
+            <li>Sales performance, delivery, customer, employee, and territory dashboards</li>
+          </ul>
+          <div class="tech-tags">
+            <span class="tech-tag">Power BI</span>
+            <span class="tech-tag">Talend</span>
+            <span class="tech-tag">Power Query</span>
+            <span class="tech-tag">DAX</span>
+            <span class="tech-tag">SQL Server</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-head">
+            <div class="proj-title">University Analytics Dashboard — PRAVAN</div>
+            <i class="ti ti-school proj-icon" aria-hidden="true"></i>
+          </div>
+          <div class="proj-meta">
+            <span class="proj-year">2024 – 2025</span>
+            <span class="badge b-academic">academic</span>
+          </div>
+          <p class="proj-desc">Dynamic Flask/JavaScript dashboard visualising 1,336 student records (2019–2021) with AJAX REST services and data-driven charts for academic decision-makers.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Flask</span>
+            <span class="tech-tag">MySQL</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">AJAX</span>
+            <span class="tech-tag">Chart.js</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-head">
+            <div class="proj-title">Security Web App — Encryption & Steganography</div>
+            <i class="ti ti-lock proj-icon" aria-hidden="true"></i>
+          </div>
+          <div class="proj-meta">
+            <span class="proj-year">2024 – 2025</span>
+            <span class="badge b-academic">academic</span>
+          </div>
+          <p class="proj-desc">Python/Flask web interface covering classical encryption, password security, attack simulation, and text steganography, with analysis of algorithm weaknesses.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Flask</span>
+            <span class="tech-tag">Cryptography</span>
+            <span class="tech-tag">Steganography</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-head">
+            <div class="proj-title">Technology Watch Automation Tool</div>
+            <i class="ti ti-eye proj-icon" aria-hidden="true"></i>
+          </div>
+          <div class="proj-meta">
+            <span class="proj-year">2024 – 2025</span>
+            <span class="badge b-academic">academic</span>
+          </div>
+          <p class="proj-desc">Python prototype automating technology watch workflows — source identification, web scraping, API-based data collection, NLP summarisation, and regulatory monitoring for Big Data ethics.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">BeautifulSoup</span>
+            <span class="tech-tag">NLP</span>
+            <span class="tech-tag">REST APIs</span>
+            <span class="tech-tag">Scrapy</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-head">
+            <div class="proj-title">E-commerce Parcel Management App</div>
+            <i class="ti ti-package proj-icon" aria-hidden="true"></i>
+          </div>
+          <div class="proj-meta">
+            <span class="proj-year">Feb – Jun 2024</span>
+            <span class="badge b-bachelor">bachelor project</span>
+          </div>
+          <p class="proj-desc">Full-stack parcel tracking web application with geolocation features, built as Bachelor graduation project in collaboration with Zeon Soft Algeria.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Geolocation</span>
+            <span class="tech-tag">REST API</span>
+            <span class="tech-tag">Database</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <div class="sec-eyebrow">// education</div>
+      <h2 class="sec-title">Academic background</h2>
+      <div class="edu-list">
+        <div class="edu-card">
+          <div class="edu-accent"></div>
+          <div>
+            <div class="edu-degree">Master's Degree in Big Data Analytics</div>
+            <div class="edu-school">University of Science and Technology Houari Boumediene (USTHB) — Bab Ezzouar, Algiers</div>
+            <div class="edu-year">2024 – 2026</div>
+          </div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-accent" style="background:rgba(0,201,167,0.45)"></div>
+          <div>
+            <div class="edu-degree">Bachelor's Degree in Information Systems & Software Engineering</div>
+            <div class="edu-school">University of Science and Technology Houari Boumediene (USTHB) — Bab Ezzouar, Algiers</div>
+            <div class="edu-year">2021 – 2024</div>
+          </div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-accent" style="background:rgba(0,201,167,0.2)"></div>
+          <div>
+            <div class="edu-degree">Baccalaureate in Mathematics</div>
+            <div class="edu-school">Lycée Said Hamdine — Algiers</div>
+            <div class="edu-year">2018 – 2021</div>
+            <span class="edu-note">✦ Très Bien — highest honours</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUAGES -->
+  <section id="languages" style="padding-top:0">
+    <div class="container">
+      <div class="sec-eyebrow">// languages</div>
+      <h2 class="sec-title">Communication</h2>
+      <div class="lang-grid">
+        <div class="lang-card">
+          <i class="ti ti-language lang-icon" aria-hidden="true"></i>
+          <div>
+            <div class="lang-name">Arabic</div>
+            <div class="lang-level">Native</div>
+          </div>
+        </div>
+        <div class="lang-card">
+          <i class="ti ti-language lang-icon" aria-hidden="true"></i>
+          <div>
+            <div class="lang-name">French</div>
+            <div class="lang-level">Native</div>
+          </div>
+        </div>
+        <div class="lang-card">
+          <i class="ti ti-language lang-icon" aria-hidden="true"></i>
+          <div>
+            <div class="lang-name">English</div>
+            <div class="lang-level">Fluent — reading, writing & speaking</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="sec-eyebrow">// contact</div>
+      <h2 class="sec-title">Get in touch</h2>
+      <div class="contact-grid">
+        <a href="mailto:sarahmokrani96@gmail.com" class="contact-item">
+          <i class="ti ti-mail" aria-hidden="true"></i>
+          <div>
+            <div class="contact-label">email</div>
+            <div class="contact-value">sarahmokrani96@gmail.com</div>
+          </div>
+        </a>
+        <a href="tel:+213794763399" class="contact-item">
+          <i class="ti ti-phone" aria-hidden="true"></i>
+          <div>
+            <div class="contact-label">phone</div>
+            <div class="contact-value">+213 794 76 33 99</div>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/sarra-mokrani" target="_blank" rel="noopener" class="contact-item">
+          <i class="ti ti-brand-linkedin" aria-hidden="true"></i>
+          <div>
+            <div class="contact-label">linkedin</div>
+            <div class="contact-value">@Sarra Mokrani</div>
+          </div>
+        </a>
+        <a href="https://github.com/sarra252" target="_blank" rel="noopener" class="contact-item">
+          <i class="ti ti-brand-github" aria-hidden="true"></i>
+          <div>
+            <div class="contact-label">github</div>
+            <div class="contact-value">@sarra252</div>
+          </div>
+        </a>
+        <div class="contact-item">
+          <i class="ti ti-map-pin" aria-hidden="true"></i>
+          <div>
+            <div class="contact-label">location</div>
+            <div class="contact-value">Hydra, Algiers, Algeria</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    built by Sarra Mokrani · 2026
+  </footer>
+
+  <script>
+    const phrases = [
+      'Data Engineer & Big Data Analyst',
+      'Building real-time pipelines with Kafka',
+      'LLM-powered SQL generation @ Djezzy',
+      'Python · SQL · Power BI · RAG',
+      'Turning raw data into decisions'
+    ];
+    let pi = 0, ci = 0;
+    const el = document.getElementById('terminal');
+    function type() {
+      const phrase = phrases[pi];
+      if (ci < phrase.length) {
+        el.innerHTML = phrase.slice(0, ++ci) + '<span class="cursor"></span>';
+        setTimeout(type, 55 + Math.random() * 30);
+      } else {
+        setTimeout(erase, 2200);
+      }
+    }
+    function erase() {
+      const phrase = phrases[pi];
+      if (ci > 0) {
+        el.innerHTML = phrase.slice(0, --ci) + '<span class="cursor"></span>';
+        setTimeout(erase, 22);
+      } else {
+        pi = (pi + 1) % phrases.length;
+        setTimeout(type, 400);
+      }
+    }
+    type();
+
+    // smooth active nav highlight
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => {
+            a.style.color = a.getAttribute('href') === '#' + entry.target.id
+              ? 'var(--teal)' : '';
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>

@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarra Mokrani — Big Data & Data Engineering</title>
+  <meta name="description" content="Portfolio of Sarra Mokrani, Computer Science graduate specialising in Big Data Analytics, data engineering, and AI-assisted data solutions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500&family=Caveat:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FFFDF7;
+      --cream2: #F5F1E8;
+      --violet: #6C4EF2;
+      --violet-lt: #EDE9FE;
+      --violet-mid: #a78bfa;
+      --coral: #F97060;
+      --coral-lt: #FEF0EE;
+      --ink: #1C1A2E;
+      --muted: #6B6B80;
+      --border: #E8E4DA;
+      --card: #FFFFFF;
+      --pf: 'Playfair Display', serif;
+      --dm: 'DM Sans', sans-serif;
+      --cav: 'Caveat', cursive;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--dm);
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,253,247,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 max(1.5rem, calc(50vw - 560px));
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-family: var(--pf);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--violet); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--violet); }
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--violet);
+      color: #fff;
+      border-radius: 6px;
+      padding: 6px 16px;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      padding: 5rem max(1.5rem, calc(50vw - 450px)) 4rem;
+      background: var(--cream);
+    }
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: start;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--violet);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      background: var(--violet-lt);
+      border-radius: 20px;
+      padding: 4px 14px;
+      margin-bottom: 1.25rem;
+    }
+    .hero-eyebrow i { font-size: 14px; }
+    .hero-name {
+      font-family: var(--pf);
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.05;
+      margin-bottom: .3rem;
+    }
+    .hero-name span { color: var(--violet); }
+    .hero-subtitle {
+      font-family: var(--pf);
+      font-size: 17px;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+    .hero-bio {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 440px;
+      margin-bottom: 2rem;
+    }
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 1.75rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: var(--ink);
+    }
+    .chip i { font-size: 13px; color: var(--violet); }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn-primary {
+      background: var(--violet);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 10px 22px;
+      font-size: 14px;
+      font-family: var(--dm);
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .btn-primary:hover { opacity: .87; }
+    .btn-ghost {
+      border: 1.5px solid var(--border);
+      color: var(--ink);
+      background: var(--card);
+      border-radius: 7px;
+      padding: 9px 20px;
+      font-size: 14px;
+      font-family: var(--dm);
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-ghost:hover { border-color: var(--violet-mid); background: var(--violet-lt); color: var(--violet); }
+
+    /* ── POLAROID FRAME ── */
+    .frame-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .polaroid {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 12px 12px 44px 12px;
+      transform: rotate(3.5deg);
+      width: 148px;
+      box-shadow: 0 4px 24px rgba(108,78,242,0.08);
+    }
+    .polaroid-photo {
+      width: 124px;
+      height: 124px;
+      border-radius: 2px;
+      background: var(--violet-lt);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .polaroid-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .polaroid-initials {
+      font-family: var(--pf);
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--violet);
+      letter-spacing: -1px;
+      user-select: none;
+    }
+    .polaroid-caption {
+      font-family: var(--cav);
+      font-size: 15px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 6px;
+    }
+    .frame-hint {
+      font-family: var(--cav);
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+      max-width: 130px;
+      line-height: 1.4;
+    }
+    .frame-arrow {
+      font-family: var(--cav);
+      font-size: 20px;
+      color: var(--violet-mid);
+    }
+
+    /* ── SECTION ── */
+    .section { padding: 4rem 0; }
+    .section + .section { padding-top: 0; }
+    .sec-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 1.75rem;
+    }
+    .sec-title {
+      font-family: var(--pf);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .sec-rule { flex: 1; height: 1px; background: var(--border); }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+      gap: 12px;
+    }
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      transition: border-color .2s;
+    }
+    .skill-card:hover { border-color: var(--violet-mid); }
+    .skill-cat {
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--violet);
+      margin-bottom: 10px;
+    }
+    .stags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .stag {
+      font-size: 11px;
+      background: var(--violet-lt);
+      color: #4c2fb5;
+      border-radius: 5px;
+      padding: 3px 9px;
+    }
+
+    /* ── PROJECTS ── */
+    .proj-grid { display: flex; flex-direction: column; gap: 14px; }
+    .proj-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, transform .15s;
+    }
+    .proj-card:hover { border-color: var(--violet-mid); transform: translateY(-2px); }
+    .proj-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .proj-name {
+      font-family: var(--pf);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .badge {
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .b-intern { background: #fef9c3; color: #854d0e; }
+    .b-acad { background: var(--violet-lt); color: #4c2fb5; }
+    .b-bach { background: var(--coral-lt); color: #9f3420; }
+    .proj-year { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .proj-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 10px; }
+    .proj-bullets { margin: 0 0 10px 1rem; }
+    .proj-bullets li { font-size: 13px; color: var(--muted); margin-bottom: 3px; }
+    .tech-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .ttag {
+      font-size: 11px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 2px 9px;
+      color: var(--muted);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-list { display: flex; flex-direction: column; gap: 12px; }
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem 1rem 1.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .edu-num {
+      font-family: var(--pf);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--violet-lt);
+      line-height: 1;
+      margin-top: 2px;
+      min-width: 32px;
+      text-align: right;
+    }
+    .edu-degree {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+    .edu-school { font-size: 13px; color: var(--muted); }
+    .edu-year { font-size: 12px; color: var(--violet); font-weight: 500; margin-top: 4px; }
+    .edu-badge {
+      display: inline-block;
+      background: #fef9c3;
+      color: #854d0e;
+      font-size: 10px;
+      border-radius: 5px;
+      padding: 2px 8px;
+      margin-top: 5px;
+    }
+
+    /* ── LANGUAGES ── */
+    .lang-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 12px;
+    }
+    .lang-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .lang-icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--violet-lt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .lang-icon-wrap i { font-size: 20px; color: var(--violet); }
+    .lang-name { font-size: 14px; font-weight: 500; color: var(--ink); }
+    .lang-level { font-size: 12px; color: var(--muted); margin-top: 1px; }
+
+    /* ── CONTACT BAND ── */
+    .contact-band {
+      background: var(--violet);
+      border-radius: 18px;
+      padding: 2.5rem 2rem;
+      margin: 0 1.5rem 4rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .contact-band-inner { max-width: 900px; margin: 0 auto; }
+    .contact-title {
+      font-family: var(--pf);
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .5rem;
+    }
+    .contact-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 1.75rem;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 10px;
+    }
+    .contact-item {
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+      transition: background .2s;
+    }
+    .contact-item:hover { background: rgba(255,255,255,.22); }
+    .contact-item i { font-size: 18px; color: rgba(255,255,255,.8); flex-shrink: 0; }
+    .contact-label { font-size: 10px; color: rgba(255,255,255,.5); margin-bottom: 1px; text-transform: uppercase; letter-spacing: .06em; }
+    .contact-value { font-size: 13px; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    footer span { color: var(--violet); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .frame-col { flex-direction: row; align-items: flex-start; }
+      .polaroid { transform: rotate(2deg); width: 110px; }
+      .polaroid-photo { width: 86px; height: 86px; }
+      .polaroid-initials { font-size: 28px; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .contact-band { margin: 0 0 3rem; border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-brand">Sarra <span>Mokrani</span></a>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Contact me</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <i class="ti ti-database" aria-hidden="true"></i>
+          Big Data · Data Engineering · BI
+        </div>
+        <h1 class="hero-name">Sarra <span>Mokrani</span></h1>
+        <p class="hero-subtitle">Computer Science Graduate — USTHB Algiers</p>
+        <p class="hero-bio">
+          Building data pipelines, AI-powered tools, and BI dashboards. Currently finishing a Master's in Big Data Analytics while developing an intelligent SQL chatbot for Djezzy. Looking for opportunities in data engineering, predictive analytics, and business intelligence.
+        </p>
+        <div class="hero-chips">
+          <span class="chip"><i class="ti ti-map-pin" aria-hidden="true"></i> Hydra, Algiers</span>
+          <span class="chip"><i class="ti ti-brand-github" aria-hidden="true"></i> sarra252</span>
+          <span class="chip"><i class="ti ti-language" aria-hidden="true"></i> Arabic · French · English</span>
+          <span class="chip"><i class="ti ti-certificate" aria-hidden="true"></i> Bac Très Bien</span>
+        </div>
+        <div class="hero-btns">
+          <a href="#projects" class="btn-primary">
+            <i class="ti ti-briefcase" aria-hidden="true"></i> View projects
+          </a>
+          <a href="mailto:sarahmokrani96@gmail.com" class="btn-ghost">
+            <i class="ti ti-mail" aria-hidden="true"></i> Get in touch
+          </a>
+          <a href="Sarra_MOKRANI_CV_EN.pdf" download class="btn-ghost">
+            <i class="ti ti-download" aria-hidden="true"></i> Download CV
+          </a>
+        </div>
+      </div>
+
+      <!-- POLAROID FRAME -->
+      <div class="frame-col">
+        <div class="polaroid">
+          <!--
+            TO ADD YOUR PHOTO:
+            Replace the .polaroid-initials div below with:
+            <img src="your-photo.jpg" alt="Sarra Mokrani" style="width:100%;height:100%;object-fit:cover;border-radius:2px;">
+          -->
+          <div class="polaroid-photo">
+            <div class="polaroid-initials">SM</div>
+          </div>
+          <div class="polaroid-caption">Sarra, 2026</div>
+        </div>
+        <div class="frame-arrow">↑</div>
+        <div class="frame-hint">Add your photo here!</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section">
+    <div class="container">
+      <div class="sec-header">
+        <h2 class="sec-title">Skills</h2>
+        <div class="sec-rule"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-cat">Languages</div>
+          <div class="stags">
+            <span class="stag">Python</span>
+            <span class="stag">SQL</span>
+            <span class="stag">C++</span>
+            <span class="stag">Java</span>
+            <span class="stag">JavaScript</span>
+            <span class="stag">PHP</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-cat">Data & BI</div>
+          <div class="stags">
+            <span class="stag">Teradata SQL</span>
+            <span class="stag">MySQL</span>
+            <span class="stag">PostgreSQL</span>
+            <span class="stag">Power BI</span>
+            <span class="stag">Talend</span>
+            <span class="stag">DAX</span>
+            <span class="stag">Tableau</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-cat">Big Data & AI</div>
+          <div class="stags">
+            <span class="stag">Apache Kafka</span>
+            <span class="stag">MongoDB</span>
+            <span class="stag">Cassandra</span>
+            <span class="stag">Docker</span>
+            <span class="stag">RAG pipelines</span>
+            <span class="stag">LLM</span>
+            <span class="stag">NLP</span>
+            <span class="stag">ETL</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-cat">Frameworks</div>
+          <div class="stags">
+            <span class="stag">Flask</span>
+            <span class="stag">FastAPI</span>
+            <span class="stag">Streamlit</span>
+            <span class="stag">Django</span>
+            <span class="stag">Laravel</span>
+            <span class="stag">BeautifulSoup</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-cat">Engineering</div>
+          <div class="stags">
+            <span class="stag">REST APIs</span>
+            <span class="stag">OAuth / JWT</span>
+            <span class="stag">UML</span>
+            <span class="stag">Agile / Scrum</span>
+            <span class="stag">SOLID</span>
+            <span class="stag">Design Patterns</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-cat">Tools</div>
+          <div class="stags">
+            <span class="stag">Git / GitHub</span>
+            <span class="stag">Figma</span>
+            <span class="stag">Postman</span>
+            <span class="stag">Trello</span>
+            <span class="stag">Notion</span>
+            <span class="stag">Graphviz</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="sec-header">
+        <h2 class="sec-title">Projects</h2>
+        <div class="sec-rule"></div>
+      </div>
+      <div class="proj-grid">
+
+        <div class="proj-card">
+          <div class="proj-top">
+            <div class="proj-name">Intelligent SQL Chatbot — Djezzy</div>
+            <span class="badge b-intern">Internship</span>
+          </div>
+          <div class="proj-year"><i class="ti ti-calendar" style="font-size:13px;vertical-align:-2px;margin-right:4px" aria-hidden="true"></i>Feb – Jun 2026 · Djezzy</div>
+          <p class="proj-desc">AI-powered chatbot that generates, optimises, and documents Teradata SQL queries from natural language input, helping engineers and business users explore telecom data without advanced SQL expertise.</p>
+          <ul class="proj-bullets">
+            <li>RAG-based knowledge system using database metadata, existing SQL, and schema context</li>
+            <li>Query optimisation for joins, date filters, indexing, and performance improvements</li>
+            <li>Streamlit/FastAPI interface for non-technical users</li>
+          </ul>
+          <div class="tech-row">
+            <span class="ttag">RAG</span>
+            <span class="ttag">Teradata SQL</span>
+            <span class="ttag">FastAPI</span>
+            <span class="ttag">Streamlit</span>
+            <span class="ttag">LLM</span>
+            <span class="ttag">Python</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-top">
+            <div class="proj-name">Real-Time Taxi Streaming Pipeline</div>
+            <span class="badge b-acad">Academic</span>
+          </div>
+          <div class="proj-year"><i class="ti ti-calendar" style="font-size:13px;vertical-align:-2px;margin-right:4px" aria-hidden="true"></i>2025 – 2026 · USTHB</div>
+          <p class="proj-desc">End-to-end Big Data pipeline for NYC Yellow Taxi data using Kafka producers/consumers and comparative NoSQL storage in MongoDB shards and Cassandra multi-node clusters.</p>
+          <ul class="proj-bullets">
+            <li>Containerised with Docker Compose — Kafka multi-broker, MongoDB sharding, Cassandra clustering</li>
+            <li>Benchmarked ingestion throughput, query latency, horizontal scalability, and fault tolerance</li>
+          </ul>
+          <div class="tech-row">
+            <span class="ttag">Apache Kafka</span>
+            <span class="ttag">MongoDB</span>
+            <span class="ttag">Cassandra</span>
+            <span class="ttag">Docker</span>
+            <span class="ttag">JSON streaming</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-top">
+            <div class="proj-name">Northwind ETL & BI Dashboard</div>
+            <span class="badge b-acad">Academic</span>
+          </div>
+          <div class="proj-year"><i class="ti ti-calendar" style="font-size:13px;vertical-align:-2px;margin-right:4px" aria-hidden="true"></i>2025 – 2026 · USTHB</div>
+          <p class="proj-desc">Decision-support data warehouse and interactive Power BI dashboard consolidating Northwind data from SQL Server and Microsoft Access, with full ETL pipeline and DAX analytics.</p>
+          <ul class="proj-bullets">
+            <li>ETL covering extraction, cleaning, deduplication, and dimensional enrichment</li>
+            <li>Sales performance, delivery, customer, employee, and territory dashboards</li>
+          </ul>
+          <div class="tech-row">
+            <span class="ttag">Power BI</span>
+            <span class="ttag">Talend</span>
+            <span class="ttag">Power Query</span>
+            <span class="ttag">DAX</span>
+            <span class="ttag">SQL Server</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-top">
+            <div class="proj-name">University Analytics Dashboard — PRAVAN</div>
+            <span class="badge b-acad">Academic</span>
+          </div>
+          <div class="proj-year"><i class="ti ti-calendar" style="font-size:13px;vertical-align:-2px;margin-right:4px" aria-hidden="true"></i>2024 – 2025 · USTHB</div>
+          <p class="proj-desc">Dynamic Flask/JavaScript dashboard visualising 1,336 student records from 2019–2021 with AJAX REST services and data-driven charts for academic decision-makers.</p>
+          <div class="tech-row">
+            <span class="ttag">Flask</span>
+            <span class="ttag">MySQL</span>
+            <span class="ttag">JavaScript</span>
+            <span class="ttag">AJAX</span>
+            <span class="ttag">Chart.js</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-top">
+            <div class="proj-name">Security Web App — Encryption & Steganography</div>
+            <span class="badge b-acad">Academic</span>
+          </div>
+          <div class="proj-year"><i class="ti ti-calendar" style="font-size:13px;vertical-align:-2px;margin-right:4px" aria-hidden="true"></i>2024 – 2025 · USTHB</div>
+          <p class="proj-desc">Python/Flask web interface covering classical encryption, password security, attack simulation, and text steganography, with analysis of algorithm weaknesses.</p>
+          <div class="tech-row">
+            <span class="ttag">Python</span>
+            <span class="ttag">Flask</span>
+            <span class="ttag">Cryptography</span>
+            <span class="ttag">Steganography</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-top">
+            <div class="proj-name">Technology Watch Automation Tool</div>
+            <span class="badge b-acad">Academic</span>
+          </div>
+          <div class="proj-year"><i class="ti ti-calendar" style="font-size:13px;vertical-align:-2px;margin-right:4px" aria-hidden="true"></i>2024 – 2025 · USTHB</div>
+          <p class="proj-desc">Python prototype automating technology watch workflows — web scraping, API-based collection, NLP summarisation, and regulatory monitoring for Big Data ethics.</p>
+          <div class="tech-row">
+            <span class="ttag">Python</span>
+            <span class="ttag">BeautifulSoup</span>
+            <span class="ttag">Scrapy</span>
+            <span class="ttag">NLP</span>
+            <span class="ttag">REST APIs</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-top">
+            <div class="proj-name">E-commerce Parcel Management App</div>
+            <span class="badge b-bach">Bachelor</span>
+          </div>
+          <div class="proj-year"><i class="ti ti-calendar" style="font-size:13px;vertical-align:-2px;margin-right:4px" aria-hidden="true"></i>Feb – Jun 2024 · Zeon Soft Algeria</div>
+          <p class="proj-desc">Full-stack parcel tracking web application with location-based tracking features, built as final Bachelor graduation project in collaboration with Zeon Soft Algeria.</p>
+          <div class="tech-row">
+            <span class="ttag">Python</span>
+            <span class="ttag">Geolocation</span>
+            <span class="ttag">REST API</span>
+            <span class="ttag">Database</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="section">
+    <div class="container">
+      <div class="sec-header">
+        <h2 class="sec-title">Education</h2>
+        <div class="sec-rule"></div>
+      </div>
+      <div class="edu-list">
+        <div class="edu-card">
+          <div class="edu-num">01</div>
+          <div>
+            <div class="edu-degree">Master's Degree in Big Data Analytics</div>
+            <div class="edu-school">University of Science and Technology Houari Boumediene (USTHB) — Bab Ezzouar, Algiers</div>
+            <div class="edu-year">2024 – 2026</div>
+          </div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-num">02</div>
+          <div>
+            <div class="edu-degree">Bachelor's Degree in Information Systems & Software Engineering</div>
+            <div class="edu-school">University of Science and Technology Houari Boumediene (USTHB) — Bab Ezzouar, Algiers</div>
+            <div class="edu-year">2021 – 2024</div>
+          </div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-num">03</div>
+          <div>
+            <div class="edu-degree">Baccalaureate in Mathematics</div>
+            <div class="edu-school">Lycée Said Hamdine — Algiers</div>
+            <div class="edu-year">2018 – 2021</div>
+            <span class="edu-badge">✦ Très Bien — highest honours</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUAGES -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-header">
+        <h2 class="sec-title">Languages</h2>
+        <div class="sec-rule"></div>
+      </div>
+      <div class="lang-grid">
+        <div class="lang-card">
+          <div class="lang-icon-wrap"><i class="ti ti-language" aria-hidden="true"></i></div>
+          <div>
+            <div class="lang-name">Arabic</div>
+            <div class="lang-level">Native</div>
+          </div>
+        </div>
+        <div class="lang-card">
+          <div class="lang-icon-wrap"><i class="ti ti-language" aria-hidden="true"></i></div>
+          <div>
+            <div class="lang-name">French</div>
+            <div class="lang-level">Native</div>
+          </div>
+        </div>
+        <div class="lang-card">
+          <div class="lang-icon-wrap"><i class="ti ti-language" aria-hidden="true"></i></div>
+          <div>
+            <div class="lang-name">English</div>
+            <div class="lang-level">Fluent — reading, writing & speaking</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <div class="contact-band" id="contact">
+    <div class="contact-title">Let's connect</div>
+    <div class="contact-sub">Open to data engineering, BI, analytics, and software engineering opportunities.</div>
+    <div class="contact-grid">
+      <a href="mailto:sarahmokrani96@gmail.com" class="contact-item">
+        <i class="ti ti-mail" aria-hidden="true"></i>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">sarahmokrani96@gmail.com</div>
+        </div>
+      </a>
+      <a href="tel:+213794763399" class="contact-item">
+        <i class="ti ti-phone" aria-hidden="true"></i>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+213 794 76 33 99</div>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/sarra-mokrani" target="_blank" rel="noopener" class="contact-item">
+        <i class="ti ti-brand-linkedin" aria-hidden="true"></i>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">@Sarra Mokrani</div>
+        </div>
+      </a>
+      <a href="https://github.com/sarra252" target="_blank" rel="noopener" class="contact-item">
+        <i class="ti ti-brand-github" aria-hidden="true"></i>
+        <div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">@sarra252</div>
+        </div>
+      </a>
+      <div class="contact-item">
+        <i class="ti ti-map-pin" aria-hidden="true"></i>
+        <div>
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Hydra, Algiers, Algeria</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Built by <span>Sarra Mokrani</span> · 2026
+  </footer>
+
+  <script>
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = document.querySelectorAll('section[id]');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => {
+            const active = a.getAttribute('href') === '#' + entry.target.id;
+            a.style.color = active ? 'var(--violet)' : '';
+            a.style.fontWeight = active ? '500' : '';
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
