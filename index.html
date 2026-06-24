@@ -36,6 +36,63 @@
       background: var(--cream);
       color: var(--ink);
       line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── BLOB BACKGROUND ── */
+    .blob-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(72px);
+      opacity: 0.55;
+      transition: transform 0.08s ease-out;
+    }
+    .blob-1 {
+      width: 520px; height: 520px;
+      background: rgba(108,78,242,0.13);
+      top: -120px; right: -100px;
+    }
+    .blob-2 {
+      width: 380px; height: 380px;
+      background: rgba(249,112,96,0.10);
+      bottom: 10%; left: -80px;
+    }
+    .blob-3 {
+      width: 300px; height: 300px;
+      background: rgba(0,180,150,0.09);
+      top: 38%; left: 55%;
+    }
+    .blob-4 {
+      width: 220px; height: 220px;
+      background: rgba(250,196,62,0.10);
+      bottom: 25%; right: 8%;
+    }
+    .blob-5 {
+      width: 180px; height: 180px;
+      background: rgba(108,78,242,0.08);
+      top: 60%; left: 20%;
+    }
+    /* cursor follower blob */
+    .blob-cursor {
+      width: 260px; height: 260px;
+      background: rgba(108,78,242,0.07);
+      top: 0; left: 0;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s ease-out, left 0.18s ease-out, top 0.18s ease-out;
+      pointer-events: none;
+    }
+
+    /* make sure all content sits above blobs */
+    nav, section, .contact-band, footer {
+      position: relative;
+      z-index: 1;
     }
 
     /* ── NAV ── */
@@ -90,7 +147,7 @@
     /* ── HERO ── */
     #hero {
       padding: 5rem max(1.5rem, calc(50vw - 450px)) 4rem;
-      background: var(--cream);
+      background: transparent;
     }
     .hero-inner {
       max-width: 900px;
@@ -148,7 +205,8 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      background: var(--card);
+      background: rgba(255,255,255,0.80);
+      backdrop-filter: blur(6px);
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 4px 12px;
@@ -277,7 +335,8 @@
       gap: 12px;
     }
     .skill-card {
-      background: var(--card);
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(8px);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 14px 16px;
@@ -304,7 +363,8 @@
     /* ── PROJECTS ── */
     .proj-grid { display: flex; flex-direction: column; gap: 14px; }
     .proj-card {
-      background: var(--card);
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(8px);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 1.25rem 1.5rem;
@@ -351,7 +411,8 @@
     /* ── EDUCATION ── */
     .edu-list { display: flex; flex-direction: column; gap: 12px; }
     .edu-card {
-      background: var(--card);
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(8px);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1rem 1.25rem 1rem 1.5rem;
@@ -395,7 +456,8 @@
       gap: 12px;
     }
     .lang-card {
-      background: var(--card);
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(8px);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1rem 1.25rem;
@@ -487,6 +549,16 @@
 </head>
 <body>
 
+  <!-- BLOB BACKGROUND -->
+  <div class="blob-bg" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="blob blob-5"></div>
+    <div class="blob blob-cursor" id="blobCursor"></div>
+  </div>
+
   <!-- NAV -->
   <nav>
     <a href="#hero" class="nav-brand">Sarra <span>Mokrani</span></a>
@@ -515,7 +587,7 @@
           <span class="chip"><i class="ti ti-map-pin" aria-hidden="true"></i> Hydra, Algiers</span>
           <span class="chip"><i class="ti ti-brand-github" aria-hidden="true"></i> sarra252</span>
           <span class="chip"><i class="ti ti-language" aria-hidden="true"></i> Arabic · French · English</span>
-          <span class="chip"><i class="ti ti-certificate" aria-hidden="true"></i> USTHB Master's Graduate</span>
+          <span class="chip"><i class="ti ti-certificate" aria-hidden="true"></i> USTHB Master's Student</span>
         </div>
         <div class="hero-btns">
           <a href="#projects" class="btn-primary">
@@ -899,6 +971,26 @@
       });
     }, { rootMargin: '-40% 0px -55% 0px' });
     sections.forEach(s => observer.observe(s));
+
+    /* cursor-following blob */
+    const blobCursor = document.getElementById('blobCursor');
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      blobCursor.style.left = mx + 'px';
+      blobCursor.style.top = my + 'px';
+    });
+
+    /* subtle parallax on static blobs */
+    const blobs = document.querySelectorAll('.blob-1,.blob-2,.blob-3,.blob-4,.blob-5');
+    const factors = [0.018, 0.025, 0.015, 0.022, 0.012];
+    document.addEventListener('mousemove', e => {
+      const cx = e.clientX - window.innerWidth / 2;
+      const cy = e.clientY - window.innerHeight / 2;
+      blobs.forEach((b, i) => {
+        b.style.transform = `translate(${cx * factors[i]}px, ${cy * factors[i]}px)`;
+      });
+    });
   </script>
 
 </body>
